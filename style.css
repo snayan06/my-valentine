@@ -277,10 +277,47 @@ button {
     position: relative;
     width: 100%;
     max-width: 900px;
-    height: 80vh;
-    /* Fixed height for cloud effect */
-    margin: 2rem auto;
+    height: 60vh;
+    /* Reduced height for hybrid layout */
+    margin: 1rem auto;
     /* Center container */
+}
+
+/* Sliding Gallery */
+.sliding-gallery {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 10px 0;
+    margin-top: -20px;
+}
+
+.sliding-track {
+    display: flex;
+    gap: 30px;
+    width: max-content;
+    animation: scroll 25s linear infinite;
+}
+
+.sliding-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(calc(-50% - 15px));
+    }
+}
+
+.polaroid {
+    width: 160px;
+    /* Smaller size for reel */
+    transform: rotate(var(--r, 0deg));
+    flex-shrink: 0;
 }
 
 .gallery-title {
