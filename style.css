@@ -318,7 +318,41 @@ p {
     transform: rotate(1deg);
 }
 
-/* Buttons Fix */
+/* Restored Button Styles */
+button {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+}
+
+#yes-btn {
+    background-color: #FFC0CB;
+    color: #C2185B;
+    box-shadow: 0 4px 15px rgba(255, 192, 203, 0.4);
+}
+
+#yes-btn:hover {
+    transform: scale(1.1);
+    background-color: #ffb3c1;
+    box-shadow: 0 6px 20px rgba(255, 192, 203, 0.6);
+}
+
+#no-btn {
+    background-color: #B3E5FC;
+    color: #333;
+    box-shadow: 0 4px 15px rgba(179, 229, 252, 0.4);
+}
+
+#no-btn:hover {
+    background-color: #81d4fa;
+}
+
+/* Buttons Container */
 .buttons {
     margin-top: 2rem;
     display: flex;
@@ -327,10 +361,8 @@ p {
     justify-content: center;
     position: relative;
     width: 100%;
-    min-height: 100px;
-    /* Ensure space */
+    min-height: 80px;
     z-index: 20;
-    /* Ensure active */
 }
 
 /* Mobile Responsiveness */
