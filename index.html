@@ -50,7 +50,23 @@
         <!-- Using a placeholder for music logic, user can add file later if they want local, or we link a sad violin sound -->
         <audio id="sad-music" src="https://www.myinstants.com/media/sounds/sad-violin.mp3"></audio>
 
-        <!-- Step 3: Success -->
+        <!-- Step 3: Afterglow -->
+        <div id="afterglow" class="screen hidden">
+            <div class="heart-burst">
+                <span>💖</span>
+                <span>💗</span>
+                <span>💕</span>
+                <span>💓</span>
+                <span>💝</span>
+                <span>💖</span>
+                <span>💗</span>
+                <span>💕</span>
+            </div>
+            <h1 class="afterglow-title">You just made my whole day</h1>
+            <p class="afterglow-subtitle">The happiest yes ever 💞</p>
+        </div>
+
+        <!-- Step 4: Success -->
         <div id="success" class="screen hidden">
             <h1>YAYYYY 🥰</h1>
             <p class="subtitle">I knew you would say yes! <br> You’re officially my Valentine, Krimu 💖</p>
@@ -62,22 +78,41 @@
             </div>
 
             <div class="gallery">
-                <div class="photo-frame">
-                    <img src="images/photo1.png" alt="Us" />
+                <!-- User Photo 1 -->
+                <div class="photo-frame" style="--r:-6deg;">
+                    <img src="images/photo1.png" alt="Sweet Moments" />
                     <p class="caption">Sweet Moments</p>
                 </div>
-                <div class="photo-frame">
-                    <img src="images/photo2.png" alt="Us" />
-                    <p class="caption">Favorite Dates</p>
+                <!-- Polaroid 2 -->
+                <div class="photo-frame" style="--r:3deg;">
+                    <img src="images/polaroid2.jpg" alt="Us" />
+                    <p class="caption">Cozy Vibes</p>
                 </div>
-                <div class="photo-frame">
-                    <img src="images/photo3.png" alt="Us" />
-                    <p class="caption">Just Us</p>
+                <!-- User Photo 2 -->
+                <div class="photo-frame" style="--r:5deg;">
+                    <img src="images/photo2.png" alt="Date Night" />
+                    <p class="caption">Date Night</p>
+                </div>
+                <!-- Polaroid 4 -->
+                <div class="photo-frame" style="--r:-4deg;">
+                    <img src="images/polaroid4.jpg" alt="Love" />
+                    <p class="caption">Forever</p>
+                </div>
+                <!-- User Photo 3 -->
+                <div class="photo-frame" style="--r:-3deg;">
+                    <img src="images/photo3.png" alt="Perfect Us" />
+                    <p class="caption">Perfect Us</p>
+                </div>
+                <!-- Polaroid 3 -->
+                <div class="photo-frame" style="--r:4deg;">
+                    <img src="images/polaroid3.jpg" alt="Sparkles" />
+                    <p class="caption">Magic</p>
                 </div>
             </div>
-
-            <p class="closing">Love you! xoxo</p>
         </div>
+
+        <p class="closing">Love you! xoxo</p>
+    </div>
     </div>
 
     <script src="script.js"></script>

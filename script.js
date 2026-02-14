@@ -1,14 +1,39 @@
 // DOM Elements
 const openingScreen = document.getElementById('opening');
 const questionScreen = document.getElementById('question');
+const afterglowScreen = document.getElementById('afterglow');
 const successScreen = document.getElementById('success');
 const yesBtn = document.getElementById('yes-btn');
 const noBtn = document.getElementById('no-btn');
 const mascot = document.getElementById('mascot');
+const buttonsWrap = document.querySelector('.buttons');
 
 // Sounds
 const yaySound = document.getElementById('yay-sound');
 const sadSound = document.getElementById('sad-music');
+
+// Audio gating for browser autoplay policies
+let audioEnabled = false;
+function enableAudio() {
+    audioEnabled = true;
+}
+document.addEventListener('click', enableAudio, { once: true });
+document.addEventListener('touchstart', enableAudio, { once: true });
+
+// Polaroid Shuffle
+let zIndexCounter = 1;
+const polaroids = document.querySelectorAll('.photo-frame');
+polaroids.forEach((frame) => {
+    frame.style.zIndex = zIndexCounter++;
+    frame.addEventListener('click', () => {
+        zIndexCounter++;
+        frame.style.zIndex = zIndexCounter;
+        const tilt = (Math.random() * 12 - 6).toFixed(1);
+        frame.style.setProperty('--r', `${tilt}deg`);
+        frame.classList.add('active');
+        setTimeout(() => frame.classList.remove('active'), 220);
+    });
+});
 
 // Initial Sequence
 setTimeout(() => {
@@ -27,37 +52,24 @@ noBtn.addEventListener('mouseenter', () => {
     if (noClickCount < 4) {
         mascot.src = "images/cute_character_sad.png";
         mascot.classList.remove('bounce-animation');
-        mascot.classList.add('shake-animation'); // We need to add this CSS
-
-        // Play sad music if first hover
-        if (sadSound.paused) {
-            sadSound.volume = 0.3;
-            sadSound.play().catch(e => console.log("Audio requires interaction"));
-        }
-
+        mascot.classList.add('shake-animation');
         document.body.classList.add('sad-mode');
     }
 });
 
 noBtn.addEventListener('mouseleave', () => {
     if (noClickCount < 4) {
-        // Bear goes back to normal if you leave the "No" button alone
+        // Bear goes back to normal
         mascot.src = "images/cute_character.png";
         mascot.classList.add('bounce-animation');
         mascot.classList.remove('shake-animation');
         document.body.classList.remove('sad-mode');
-
-        // Stop sad music
-        sadSound.pause();
-        sadSound.currentTime = 0;
     }
 });
 
 yesBtn.addEventListener('mouseenter', () => {
     mascot.src = "images/cute_character_happy.png";
     document.body.classList.remove('sad-mode');
-    sadSound.pause();
-    sadSound.currentTime = 0;
 });
 
 yesBtn.addEventListener('mouseleave', () => {
@@ -66,6 +78,7 @@ yesBtn.addEventListener('mouseleave', () => {
 
 
 noBtn.addEventListener('click', () => {
+    enableAudio();
     noClickCount++;
     moveNoButton();
     // playBonk(); // Removed as requested
@@ -92,23 +105,18 @@ noBtn.addEventListener('click', () => {
 // Removed playBonk function
 
 function moveNoButton() {
-    const container = document.querySelector('.container');
-    const containerRect = container.getBoundingClientRect();
+    const containerRect = buttonsWrap.getBoundingClientRect();
     const btnRect = noBtn.getBoundingClientRect();
 
     // Calculate safe boundaries within the container
-    const buffer = 20; // Padding from edge
+    const buffer = 8; // Padding from edge
     const maxX = containerRect.width - btnRect.width - buffer;
     const maxY = containerRect.height - btnRect.height - buffer;
 
-    const randomX = Math.random() * maxX;
-    const randomY = Math.random() * maxY;
+    const randomX = Math.max(buffer, Math.random() * maxX);
+    const randomY = Math.max(buffer, Math.random() * maxY);
 
-    // Apply position (Note: this moves relative to nearest positioned ancestor, which is .buttons normally, but we might want absolute)
-    // To make it jump around effectively, we need to set its position to absolute relative to the container.
-    // However, initially it's in flex flow.
-    // Let's force absolute positioning on the first click.
-
+    // Apply position relative to .buttons
     if (noClickCount === 1) {
         noBtn.style.position = 'absolute';
     }
@@ -119,43 +127,30 @@ function moveNoButton() {
 
 // Yes Button Logic
 yesBtn.addEventListener('click', () => {
+    enableAudio();
     triggerConfetti();
     playYay();
     mascot.src = "images/cute_character_happy.png"; // Stay happy
 
     questionScreen.classList.remove('active');
     questionScreen.classList.add('hidden');
-    successScreen.classList.remove('hidden');
-    successScreen.classList.add('active');
+    afterglowScreen.classList.remove('hidden');
+    afterglowScreen.classList.add('active');
 
-    startSlideshow();
+    setTimeout(() => {
+        afterglowScreen.classList.remove('active');
+        afterglowScreen.classList.add('hidden');
+        successScreen.classList.remove('hidden');
+        successScreen.classList.add('active');
+    }, 2200);
 });
 
 function playYay() {
+    if (!audioEnabled) {
+        return;
+    }
     yaySound.volume = 0.5;
     yaySound.play();
-}
-
-// Slideshow Logic
-function startSlideshow() {
-    let slideIndex = 0;
-    const slides = document.querySelectorAll('.photo-frame');
-
-    // Show first one immediately
-    if (slides.length > 0) {
-        slides[0].classList.add('visible');
-    }
-
-    setInterval(() => {
-        // Hide current
-        slides[slideIndex].classList.remove('visible');
-
-        // Move to next
-        slideIndex = (slideIndex + 1) % slides.length;
-
-        // Show next
-        slides[slideIndex].classList.add('visible');
-    }, 3000); // Change image every 3 seconds
 }
 
 // Confetti Effect

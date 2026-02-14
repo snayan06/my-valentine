@@ -228,7 +228,7 @@ p {
     justify-content: center;
     position: relative;
     /* For absolute positioning of NO button */
-    height: 60px;
+    height: 140px;
     /* Reserve space */
 }
 
@@ -268,36 +268,34 @@ button {
     margin: 2rem 0;
     font-style: italic;
     color: #555;
+    font-size: 1.1rem;
 }
 
 .gallery {
-    position: relative;
-    width: 100%;
-    height: 300px;
-    /* Automated height */
-    margin-top: 2rem;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+    gap: 30px;
+    margin-top: 2rem;
+    padding-bottom: 2rem;
 }
 
 .photo-frame {
-    position: absolute;
+    position: relative;
     background: white;
-    padding: 10px 10px 25px 10px;
+    padding: 12px 12px 35px 12px;
     /* Polaroid style bottom padding */
     border-radius: 2px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-    opacity: 0;
-    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
-    max-width: 250px;
-    transform: scale(0.9) rotate(0deg);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 220px;
+    transform: rotate(var(--r, 0deg));
 }
 
-.photo-frame.visible {
-    opacity: 1;
-    transform: scale(1) rotate(-3deg);
-    z-index: 2;
+.photo-frame:hover {
+    z-index: 10;
+    transform: scale(1.1) rotate(0deg) !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
 .photo-frame img {
@@ -320,6 +318,123 @@ button {
     margin-top: 2rem;
     font-weight: 600;
     color: #C2185B;
+}
+
+/* Afterglow */
+.afterglow-title {
+    font-size: 2.2rem;
+    margin: 1.5rem 0 0.5rem;
+}
+
+.afterglow-subtitle {
+    font-size: 1.2rem;
+    color: #6b4b5b;
+}
+
+.heart-burst {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    margin: 0 auto;
+}
+
+.heart-burst span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    font-size: 2rem;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.2);
+    animation: burst 1.6s ease-out forwards;
+}
+
+.heart-burst span:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.heart-burst span:nth-child(2) {
+    animation-delay: 0.05s;
+}
+
+.heart-burst span:nth-child(3) {
+    animation-delay: 0.1s;
+}
+
+.heart-burst span:nth-child(4) {
+    animation-delay: 0.15s;
+}
+
+.heart-burst span:nth-child(5) {
+    animation-delay: 0.2s;
+}
+
+.heart-burst span:nth-child(6) {
+    animation-delay: 0.25s;
+}
+
+.heart-burst span:nth-child(7) {
+    animation-delay: 0.3s;
+}
+
+.heart-burst span:nth-child(8) {
+    animation-delay: 0.35s;
+}
+
+.heart-burst span:nth-child(1) {
+    --x: -70px;
+    --y: -80px;
+}
+
+.heart-burst span:nth-child(2) {
+    --x: 60px;
+    --y: -75px;
+}
+
+.heart-burst span:nth-child(3) {
+    --x: -90px;
+    --y: 10px;
+}
+
+.heart-burst span:nth-child(4) {
+    --x: 95px;
+    --y: 5px;
+}
+
+.heart-burst span:nth-child(5) {
+    --x: -55px;
+    --y: 85px;
+}
+
+.heart-burst span:nth-child(6) {
+    --x: 70px;
+    --y: 90px;
+}
+
+.heart-burst span:nth-child(7) {
+    --x: 0px;
+    --y: -110px;
+}
+
+.heart-burst span:nth-child(8) {
+    --x: 0px;
+    --y: 110px;
+}
+
+@keyframes burst {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.2);
+    }
+
+    30% {
+        opacity: 1;
+        transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(1.1);
+    }
 }
 
 /* Mobile Responsiveness */
