@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@400;600&display=swap"
+        rel="stylesheet">
+    <!-- Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+
+<body>
+    <!-- Floating Hearts Background -->
+    <div class="hearts-container">
+        <div class="heart">💖</div>
+        <div class="heart">💕</div>
+        <div class="heart">💗</div>
+        <div class="heart">💓</div>
+        <div class="heart">💝</div>
+        <div class="heart">💖</div>
+        <div class="heart">💕</div>
+        <div class="heart">💗</div>
+        <div class="heart">💓</div>
+        <div class="heart">💝</div>
+    </div>
+
+    <div class="container">
+        <!-- Step 1: Opening -->
+        <div id="opening" class="screen active">
+            <h1 class="fade-in">Hey you...</h1>
+            <p class="fade-in delay-1">I have something important to ask 💌</p>
+        </div>
+
+        <!-- Step 2: Question -->
+        <div id="question" class="screen hidden">
+            <img src="images/cute_character.png" alt="Cute Bear" class="cute-character bounce-animation">
+            <h1 class="animated-text">💖 Will you be my Valentine? 💖</h1>
+            <div class="buttons">
+                <button id="yes-btn">YES 💕</button>
+                <button id="no-btn">NO 🙈</button>
+            </div>
+        </div>
+
+        <!-- Step 3: Success -->
+        <div id="success" class="screen hidden">
+            <h1>YAYYYY 🥰</h1>
+            <p class="subtitle">I knew you would say yes! <br> You’re officially my Valentine 💖</p>
+
+            <div class="quotes-container">
+                <div class="quote fade-in">"You make my heart feel at home."</div>
+                <div class="quote fade-in">"Forever starts with you."</div>
+                <div class="quote fade-in">"I’d choose you in every lifetime."</div>
+            </div>
+
+            <div class="gallery">
+                <div class="photo-frame">
+                    <img src="images/photo1.png" alt="Us" />
+                    <p class="caption">Sweet Moments</p>
+                </div>
+                <div class="photo-frame">
+                    <img src="images/photo2.png" alt="Us" />
+                    <p class="caption">Favorite Dates</p>
+                </div>
+                <div class="photo-frame">
+                    <img src="images/photo3.png" alt="Us" />
+                    <p class="caption">Just Us</p>
+                </div>
+            </div>
+
+            <p class="closing">Love you! xoxo</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
