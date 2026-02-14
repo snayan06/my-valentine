@@ -10,7 +10,7 @@ const buttonsWrap = document.querySelector('.buttons');
 
 // Sounds
 const yaySound = document.getElementById('yay-sound');
-const sadSound = document.getElementById('sad-music');
+// const sadSound = document.getElementById('sad-music'); // Removed usage
 
 // Audio gating for browser autoplay policies
 let audioEnabled = false;
@@ -81,7 +81,6 @@ noBtn.addEventListener('click', () => {
     enableAudio();
     noClickCount++;
     moveNoButton();
-    // playBonk(); // Removed as requested
 
     // Scale YES button
     const currentScale = 1 + (noClickCount * 0.2);
@@ -102,7 +101,6 @@ noBtn.addEventListener('click', () => {
     }
 });
 
-// Removed playBonk function
 
 function moveNoButton() {
     const containerRect = buttonsWrap.getBoundingClientRect();
