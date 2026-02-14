@@ -271,55 +271,96 @@ button {
     font-size: 1.1rem;
 }
 
-.gallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
+
+.gallery-container {
+    width: 100%;
     margin-top: 2rem;
-    padding-bottom: 2rem;
+    padding-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.gallery-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #C2185B;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+/* Main Focus Gallery */
+.main-gallery {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.main-photo {
+    width: 260px;
+    /* Larger size for main photos */
+    z-index: 5;
+}
+
+/* Sliding Gallery */
+.sliding-gallery {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 20px 0;
+}
+
+.sliding-track {
+    display: flex;
+    gap: 30px;
+    width: max-content;
+    animation: scroll 20s linear infinite;
+}
+
+.sliding-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(calc(-50% - 15px));
+        /* Move half the track length */
+    }
+}
+
+.polaroid {
+    width: 180px;
+    /* Smaller size for sliding photos */
+    transform: rotate(var(--r, 0deg));
+    flex-shrink: 0;
 }
 
 .photo-frame {
     position: relative;
     background: white;
-    padding: 12px 12px 35px 12px;
-    /* Polaroid style bottom padding */
+    padding: 12px 12px 40px 12px;
     border-radius: 2px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: 220px;
-    transform: rotate(var(--r, 0deg));
-    animation: float-frame 6s ease-in-out infinite;
-    animation-delay: calc(var(--r) * -100ms);
-    /* Randomize start time based on rotation */
-}
-
-@keyframes float-frame {
-
-    0%,
-    100% {
-        transform: rotate(var(--r, 0deg)) translateY(0);
-    }
-
-    50% {
-        transform: rotate(var(--r, 0deg)) translateY(-5px);
-    }
 }
 
 .photo-frame:hover {
     z-index: 10;
-    transform: scale(1.1) rotate(0deg) !important;
+    transform: scale(1.05) rotate(0deg) !important;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
 .photo-frame img {
     width: 100%;
+    height: auto;
     border-radius: 2px;
-    /* Sharp corners key for polaroid feel */
     display: block;
-    filter: sepia(0.2) contrast(1.1);
-    /* Slight vintage/Ghibli feel */
+    filter: sepia(0.1) contrast(1.05);
 }
 
 .caption {
