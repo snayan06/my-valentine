@@ -4,6 +4,11 @@ const questionScreen = document.getElementById('question');
 const successScreen = document.getElementById('success');
 const yesBtn = document.getElementById('yes-btn');
 const noBtn = document.getElementById('no-btn');
+const mascot = document.getElementById('mascot');
+
+// Sounds
+const yaySound = document.getElementById('yay-sound');
+const sadSound = document.getElementById('sad-music');
 
 // Initial Sequence
 setTimeout(() => {
@@ -11,14 +16,59 @@ setTimeout(() => {
     openingScreen.classList.add('hidden');
     questionScreen.classList.remove('hidden');
     questionScreen.classList.add('active');
-}, 3500); // 3.5s delay for reading first message
+}, 3500);
 
 // No Button Logic
 let noClickCount = 0;
 
+// Emotional Bear Logic
+noBtn.addEventListener('mouseenter', () => {
+    // Bear gets sad / shocked
+    if (noClickCount < 4) {
+        mascot.src = "images/cute_character_sad.png";
+        mascot.classList.remove('bounce-animation');
+        mascot.classList.add('shake-animation'); // We need to add this CSS
+
+        // Play sad music if first hover
+        if (sadSound.paused) {
+            sadSound.volume = 0.3;
+            sadSound.play().catch(e => console.log("Audio requires interaction"));
+        }
+
+        document.body.classList.add('sad-mode');
+    }
+});
+
+noBtn.addEventListener('mouseleave', () => {
+    if (noClickCount < 4) {
+        // Bear goes back to normal if you leave the "No" button alone
+        mascot.src = "images/cute_character.png";
+        mascot.classList.add('bounce-animation');
+        mascot.classList.remove('shake-animation');
+        document.body.classList.remove('sad-mode');
+
+        // Stop sad music
+        sadSound.pause();
+        sadSound.currentTime = 0;
+    }
+});
+
+yesBtn.addEventListener('mouseenter', () => {
+    mascot.src = "images/cute_character_happy.png";
+    document.body.classList.remove('sad-mode');
+    sadSound.pause();
+    sadSound.currentTime = 0;
+});
+
+yesBtn.addEventListener('mouseleave', () => {
+    mascot.src = "images/cute_character.png";
+});
+
+
 noBtn.addEventListener('click', () => {
     noClickCount++;
     moveNoButton();
+    // playBonk(); // Removed as requested
 
     // Scale YES button
     const currentScale = 1 + (noClickCount * 0.2);
@@ -28,16 +78,18 @@ noBtn.addEventListener('click', () => {
     if (noClickCount === 1) {
         noBtn.innerText = "Are you sure? 🥺";
     } else if (noClickCount === 2) {
-        noBtn.innerText = "Hmm... think again 😌";
+        noBtn.innerText = "Don't break my heart! 💔";
         noBtn.style.transform = "scale(0.8)";
     } else if (noClickCount === 3) {
-        noBtn.innerText = "Suspicious... 👀";
+        noBtn.innerText = "I'm telling your mom! 😭";
         noBtn.style.transform = "scale(0.6)";
     } else if (noClickCount >= 4) {
         noBtn.style.opacity = "0";
         noBtn.style.pointerEvents = "none";
     }
 });
+
+// Removed playBonk function
 
 function moveNoButton() {
     const container = document.querySelector('.container');
@@ -68,11 +120,43 @@ function moveNoButton() {
 // Yes Button Logic
 yesBtn.addEventListener('click', () => {
     triggerConfetti();
+    playYay();
+    mascot.src = "images/cute_character_happy.png"; // Stay happy
+
     questionScreen.classList.remove('active');
     questionScreen.classList.add('hidden');
     successScreen.classList.remove('hidden');
     successScreen.classList.add('active');
+
+    startSlideshow();
 });
+
+function playYay() {
+    yaySound.volume = 0.5;
+    yaySound.play();
+}
+
+// Slideshow Logic
+function startSlideshow() {
+    let slideIndex = 0;
+    const slides = document.querySelectorAll('.photo-frame');
+
+    // Show first one immediately
+    if (slides.length > 0) {
+        slides[0].classList.add('visible');
+    }
+
+    setInterval(() => {
+        // Hide current
+        slides[slideIndex].classList.remove('visible');
+
+        // Move to next
+        slideIndex = (slideIndex + 1) % slides.length;
+
+        // Show next
+        slides[slideIndex].classList.add('visible');
+    }, 3000); // Change image every 3 seconds
+}
 
 // Confetti Effect
 function triggerConfetti() {

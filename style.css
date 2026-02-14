@@ -11,6 +11,43 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     text-align: center;
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🪄</text></svg>") 16 0, auto;
+    /* Magic Wand Cursor */
+}
+
+/* Sad Mode */
+body.sad-mode {
+    background: linear-gradient(135deg, #cfd9df, #e2ebf0);
+}
+
+body.sad-mode .container {
+    filter: grayscale(0.8);
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px) rotate(-5deg);
+    }
+
+    50% {
+        transform: translateX(5px) rotate(5deg);
+    }
+
+    75% {
+        transform: translateX(-5px) rotate(-5deg);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.shake-animation {
+    animation: shake 0.5s infinite;
 }
 
 .cute-character {
@@ -234,40 +271,48 @@ button {
 }
 
 .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 15px;
+    position: relative;
+    width: 100%;
+    height: 300px;
+    /* Automated height */
     margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .photo-frame {
+    position: absolute;
     background: white;
-    padding: 5px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transform: rotate(-2deg);
-    transition: transform 0.3s;
+    padding: 10px 10px 25px 10px;
+    /* Polaroid style bottom padding */
+    border-radius: 2px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+    max-width: 250px;
+    transform: scale(0.9) rotate(0deg);
 }
 
-.photo-frame:nth-child(even) {
-    transform: rotate(2deg);
-}
-
-.photo-frame:hover {
-    transform: scale(1.05) rotate(0);
-    z-index: 5;
+.photo-frame.visible {
+    opacity: 1;
+    transform: scale(1) rotate(-3deg);
+    z-index: 2;
 }
 
 .photo-frame img {
     width: 100%;
-    border-radius: 8px;
+    border-radius: 2px;
+    /* Sharp corners key for polaroid feel */
     display: block;
+    filter: sepia(0.2) contrast(1.1);
+    /* Slight vintage/Ghibli feel */
 }
 
 .caption {
-    font-size: 0.8rem;
-    margin-top: 5px;
-    color: #777;
+    font-size: 1rem;
+    margin-top: 10px;
+    color: #444;
     font-family: 'Dancing Script', cursive;
 }
 

@@ -30,24 +30,30 @@
     <div class="container">
         <!-- Step 1: Opening -->
         <div id="opening" class="screen active">
-            <h1 class="fade-in">Hey you...</h1>
+            <h1 class="fade-in">Hey Krimu...</h1>
             <p class="fade-in delay-1">I have something important to ask 💌</p>
         </div>
 
         <!-- Step 2: Question -->
         <div id="question" class="screen hidden">
-            <img src="images/cute_character.png" alt="Cute Bear" class="cute-character bounce-animation">
-            <h1 class="animated-text">💖 Will you be my Valentine? 💖</h1>
+            <img id="mascot" src="images/cute_character.png" alt="Cute Bear" class="cute-character bounce-animation">
+            <h1 class="animated-text">💖 Will you be my Valentine, Krima? 💖</h1>
             <div class="buttons">
                 <button id="yes-btn">YES 💕</button>
                 <button id="no-btn">NO 🙈</button>
             </div>
         </div>
 
+        <!-- Sounds -->
+        <!-- Bonk removed as per user request -->
+        <audio id="yay-sound" src="https://www.myinstants.com/media/sounds/yay-6.mp3"></audio>
+        <!-- Using a placeholder for music logic, user can add file later if they want local, or we link a sad violin sound -->
+        <audio id="sad-music" src="https://www.myinstants.com/media/sounds/sad-violin.mp3"></audio>
+
         <!-- Step 3: Success -->
         <div id="success" class="screen hidden">
             <h1>YAYYYY 🥰</h1>
-            <p class="subtitle">I knew you would say yes! <br> You’re officially my Valentine 💖</p>
+            <p class="subtitle">I knew you would say yes! <br> You’re officially my Valentine, Krimu 💖</p>
 
             <div class="quotes-container">
                 <div class="quote fade-in">"You make my heart feel at home."</div>
