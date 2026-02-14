@@ -272,87 +272,43 @@ button {
 }
 
 
-.gallery-container {
+/* Love Cloud Layout */
+.love-cloud {
+    position: relative;
     width: 100%;
-    margin-top: 2rem;
-    padding-bottom: 3rem;
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
+    max-width: 900px;
+    height: 80vh;
+    /* Fixed height for cloud effect */
+    margin: 2rem auto;
+    /* Center container */
 }
 
 .gallery-title {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #C2185B;
-    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
-}
-
-/* Main Focus Gallery */
-.main-gallery {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    flex-wrap: wrap;
-    margin-bottom: 1rem;
-}
-
-.main-photo {
-    width: 260px;
-    /* Larger size for main photos */
-    z-index: 5;
-}
-
-/* Sliding Gallery */
-.sliding-gallery {
+    position: absolute;
+    top: -50px;
     width: 100%;
-    overflow: hidden;
-    position: relative;
-    padding: 20px 0;
-}
-
-.sliding-track {
-    display: flex;
-    gap: 30px;
-    width: max-content;
-    animation: scroll 20s linear infinite;
-}
-
-.sliding-track:hover {
-    animation-play-state: paused;
-}
-
-@keyframes scroll {
-    0% {
-        transform: translateX(0);
-    }
-
-    100% {
-        transform: translateX(calc(-50% - 15px));
-        /* Move half the track length */
-    }
-}
-
-.polaroid {
-    width: 180px;
-    /* Smaller size for sliding photos */
-    transform: rotate(var(--r, 0deg));
-    flex-shrink: 0;
+    text-align: center;
+    font-size: 2.5rem;
+    color: #C2185B;
+    text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.8);
+    z-index: 20;
 }
 
 .photo-frame {
-    position: relative;
+    position: absolute;
     background: white;
-    padding: 12px 12px 40px 12px;
+    padding: 10px 10px 35px 10px;
     border-radius: 2px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Bouncy transition */
+    cursor: pointer;
 }
 
 .photo-frame:hover {
-    z-index: 10;
-    transform: scale(1.05) rotate(0deg) !important;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    z-index: 100 !important;
+    transform: scale(1.2) rotate(0deg) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .photo-frame img {
@@ -360,7 +316,130 @@ button {
     height: auto;
     border-radius: 2px;
     display: block;
-    filter: sepia(0.1) contrast(1.05);
+    filter: sepia(0.05) contrast(1.05);
+}
+
+.caption {
+    font-size: 1rem;
+    margin-top: 10px;
+    color: #444;
+    font-family: 'Dancing Script', cursive;
+    text-align: center;
+}
+
+/* Sizing */
+.p-main {
+    width: 220px;
+    z-index: 10;
+}
+
+.p-scat {
+    width: 160px;
+    z-index: 5;
+}
+
+/* Desktop Positioning (Cloud) */
+/* Main Cluster */
+.p1 {
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, 0) rotate(-3deg);
+}
+
+.p2 {
+    top: 50%;
+    left: 35%;
+    transform: translate(-50%, -50%) rotate(5deg);
+}
+
+.p3 {
+    top: 50%;
+    left: 65%;
+    transform: translate(-50%, -50%) rotate(-4deg);
+}
+
+/* Scattered */
+.s1 {
+    top: 10%;
+    left: 10%;
+    transform: rotate(-10deg);
+}
+
+.s2 {
+    top: 5%;
+    right: 15%;
+    transform: rotate(8deg);
+}
+
+.s3 {
+    bottom: 10%;
+    left: 20%;
+    transform: rotate(6deg);
+}
+
+.s4 {
+    bottom: 15%;
+    right: 10%;
+    transform: rotate(-5deg);
+}
+
+.s5 {
+    top: 40%;
+    left: 5%;
+    transform: rotate(-12deg);
+}
+
+.s6 {
+    top: 35%;
+    right: 5%;
+    transform: rotate(10deg);
+}
+
+/* Mobile Responsiveness for Love Cloud */
+@media (max-width: 768px) {
+    .love-cloud {
+        height: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        padding-top: 2rem;
+    }
+
+    .gallery-title {
+        position: relative;
+        top: 0;
+        margin-bottom: 2rem;
+    }
+
+    .photo-frame {
+        position: relative;
+        /* Reset absolute positioning */
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        transform: rotate(var(--r, 0deg)) !important;
+        /* Use default or random if we had JS, but here reset */
+    }
+
+    /* Add some random rotation via nth-child for mobile */
+    .photo-frame:nth-child(odd) {
+        transform: rotate(-3deg) !important;
+    }
+
+    .photo-frame:nth-child(even) {
+        transform: rotate(3deg) !important;
+    }
+
+    .p-main {
+        width: 80%;
+        margin-bottom: 10px;
+    }
+
+    .p-scat {
+        width: 45%;
+    }
 }
 
 .caption {
