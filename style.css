@@ -219,133 +219,47 @@ p {
     }
 }
 
-/* Buttons */
-.buttons {
-    margin-top: 2rem;
+/* Unified Gallery Layout */
+.unified-gallery {
+    width: 100%;
+    margin: 2rem auto;
     display: flex;
-    gap: 20px;
+    flex-direction: column;
+    gap: 3rem;
     align-items: center;
-    justify-content: center;
-    position: relative;
-    /* For absolute positioning of NO button */
-    height: 140px;
-    /* Reserve space */
-}
-
-button {
-    padding: 15px 30px;
-    border: none;
-    border-radius: 50px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-}
-
-#yes-btn {
-    background-color: #FFC0CB;
-    color: #C2185B;
-    box-shadow: 0 4px 15px rgba(255, 192, 203, 0.4);
-}
-
-#yes-btn:hover {
-    transform: scale(1.1);
-    background-color: #ffb3c1;
-}
-
-#no-btn {
-    background-color: #B3E5FC;
-    color: #333;
-}
-
-#no-btn:hover {
-    background-color: #81d4fa;
-}
-
-/* Success Sequence */
-.quotes-container {
-    margin: 2rem 0;
-    font-style: italic;
-    color: #555;
-    font-size: 1.1rem;
-}
-
-
-/* Love Cloud Layout */
-.love-cloud {
-    position: relative;
-    width: 100%;
-    max-width: 900px;
-    height: 60vh;
-    /* Reduced height for hybrid layout */
-    margin: 1rem auto;
-    /* Center container */
-}
-
-/* Sliding Gallery */
-.sliding-gallery {
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-    padding: 10px 0;
-    margin-top: -20px;
-}
-
-.sliding-track {
-    display: flex;
-    gap: 30px;
-    width: max-content;
-    animation: scroll 25s linear infinite;
-}
-
-.sliding-track:hover {
-    animation-play-state: paused;
-}
-
-@keyframes scroll {
-    0% {
-        transform: translateX(0);
-    }
-
-    100% {
-        transform: translateX(calc(-50% - 15px));
-    }
-}
-
-.polaroid {
-    width: 160px;
-    /* Smaller size for reel */
-    transform: rotate(var(--r, 0deg));
-    flex-shrink: 0;
 }
 
 .gallery-title {
-    position: absolute;
-    top: -50px;
-    width: 100%;
-    text-align: center;
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     color: #C2185B;
-    text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.8);
-    z-index: 20;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+    margin-bottom: 1rem;
 }
 
+/* Rows */
+.gallery-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    width: 100%;
+}
+
+/* Photo Frames */
 .photo-frame {
-    position: absolute;
+    position: relative;
     background: white;
-    padding: 10px 10px 35px 10px;
+    padding: 12px 12px 40px 12px;
     border-radius: 2px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    /* Bouncy transition */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
 }
 
 .photo-frame:hover {
-    z-index: 100 !important;
-    transform: scale(1.2) rotate(0deg) !important;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    transform: scale(1.05) rotate(0deg) !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
 .photo-frame img {
@@ -357,80 +271,93 @@ button {
 }
 
 .caption {
-    font-size: 1rem;
+    font-size: 1.1rem;
     margin-top: 10px;
     color: #444;
     font-family: 'Dancing Script', cursive;
     text-align: center;
+    width: 100%;
+    position: absolute;
+    bottom: 10px;
+    left: 0;
 }
 
-/* Sizing */
-.p-main {
-    width: 280px;
-    z-index: 10;
+/* Highlight Photos (Top 3) */
+.highlight {
+    width: 260px;
+    transform: rotate(var(--r, 0deg));
 }
 
-/* Desktop Positioning (Cloud) */
-/* Main Cluster */
-.p1 {
-    top: 25%;
-    left: 50%;
-    transform: translate(-50%, 0) rotate(-5deg);
+.highlight:nth-child(1) {
+    transform: rotate(-3deg);
 }
 
-.p2 {
-    top: 55%;
-    left: 30%;
-    transform: translate(-50%, -50%) rotate(8deg);
+.highlight:nth-child(2) {
+    transform: rotate(2deg);
 }
 
-.p3 {
-    top: 55%;
-    left: 70%;
-    transform: translate(-50%, -50%) rotate(-6deg);
+.highlight:nth-child(3) {
+    transform: rotate(-2deg);
 }
 
-/* Mobile Responsiveness for Love Cloud */
+/* Polaroids (Bottom 5) */
+.polaroid {
+    width: 180px;
+}
+
+/* Subtle random rotations for flow */
+.polaroid:nth-child(odd) {
+    transform: rotate(3deg);
+}
+
+.polaroid:nth-child(even) {
+    transform: rotate(-2deg);
+}
+
+.polaroid:nth-child(3) {
+    transform: rotate(1deg);
+}
+
+/* Buttons Fix */
+.buttons {
+    margin-top: 2rem;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    min-height: 100px;
+    /* Ensure space */
+    z-index: 20;
+    /* Ensure active */
+}
+
+/* Mobile Responsiveness */
 @media (max-width: 768px) {
-    .love-cloud {
-        height: auto;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 30px;
-        padding-top: 2rem;
-        padding-bottom: 2rem;
+    .gallery-row {
+        gap: 20px;
     }
 
-    .gallery-title {
+    .highlight {
+        width: 90%;
+        max-width: 300px;
+    }
+
+    .polaroid {
+        width: 45%;
+        max-width: 160px;
+    }
+
+    .buttons {
+        flex-direction: column;
+        gap: 15px;
+        min-height: 140px;
+    }
+
+    #no-btn {
+        /* Ensure it starts relative so it stacks correctly before moving */
         position: relative;
-        top: 0;
-        margin-bottom: 1rem;
-    }
-
-    .photo-frame {
-        position: relative;
-        /* Reset absolute positioning */
-        top: auto !important;
-        left: auto !important;
-        right: auto !important;
-        bottom: auto !important;
-        transform: rotate(var(--r, 0deg)) !important;
-    }
-
-    /* Add some random rotation via nth-child for mobile */
-    .photo-frame:nth-child(odd) {
-        transform: rotate(-3deg) !important;
-    }
-
-    .photo-frame:nth-child(even) {
-        transform: rotate(3deg) !important;
-    }
-
-    .p-main {
-        width: 85%;
-        max-width: 320px;
-        margin-bottom: 15px;
     }
 }
 
